@@ -1,17 +1,16 @@
 import React, { Fragment } from 'react'
 import Footer from '../../Components/Footer/Footer'
-import Home from '../../Components/User/Home/Home'
-import Services from '../../Components/User/Home/Services'
+import Description from '../../Components/ServiceProvider/Home/Description'
+import Home from '../../Components/ServiceProvider/Home/Home'
 
 function LandinPage() {
   return (
     <div>
         <Fragment>
             <Home/>
-            <Services/>
+            <Description/>
             <Footer/>
         </Fragment>
-      
     </div>
   )
 }
