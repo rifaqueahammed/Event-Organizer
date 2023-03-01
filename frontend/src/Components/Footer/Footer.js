@@ -13,12 +13,12 @@ function Footer() {
       <h1 className='cursor-pointer'>Quik Links</h1>
     </div>
     <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-    <div className='flex justify-around'>
+    <div className='flex justify-between md:justify-around'>
         <div className='text-md text-white italic cursor-pointer font-bold'>
         <h1 className=''>Event</h1>
         <h1 className=''>Organizer</h1>
         </div>
-        <div className='text-white p-7'><h2>@2023 Event Organizing  Solution India Pvt.Lmd.</h2></div>
+        <div className='text-white ml-5 md:ml-0 md:p-5'><h2>@2023 Event Organizing  Solution India Pvt.Lmd.</h2></div>
     </div>
     </div>
   )

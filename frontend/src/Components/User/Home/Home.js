@@ -9,7 +9,6 @@ function Home() {
           <div className='sticky top-0'><Navbar/></div>
           <div className='absolute inset-x-2/4 top-3/4'><Location/></div>
       </div>
-      
     </div>
   )
 }

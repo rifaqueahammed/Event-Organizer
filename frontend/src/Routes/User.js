@@ -1,16 +1,16 @@
 import React from 'react'
 import { Route,Routes } from 'react-router-dom';
-import LandinPage from '../Pages/User/LandinPage';
+import Homepage from '../Pages/User/Homepage';
 
-function User() {
+function UserRoutes() {
   return (
     <div>
         <Routes>
-            <Route path='/' element={<LandinPage/>}></Route>
+           <Route path='/' element={<Homepage/>}></Route>
         </Routes>
-      
     </div>
   )
 }
 
-export default User
+export default UserRoutes
+
