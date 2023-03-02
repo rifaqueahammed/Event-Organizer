@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from '../../../axios'
 
 function SignUp() {
+    const navigate = useNavigate(); 
     const [form, setForm] = useState({
         companyname: "",
         email: "",
@@ -58,7 +60,9 @@ function SignUp() {
             email : form.email,
             phone : form.phone,
          }).then((result)=>{
-
+            if(result.data.success){
+              navigate('/serviceprovider')
+            }
          })
        }
       });

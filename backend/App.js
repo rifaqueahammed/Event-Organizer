@@ -6,7 +6,7 @@ const cors = require('cors')
 const dbconnection = require("./Config/connection");
 
 const userRouter = require('./Routes/user');
-// const adminRouter = require('./Routes/admin');
+const adminRouter = require('./Routes/admin');
 const serviceProviderRouter = require('./Routes/serviceProvider')
 
 
@@ -22,7 +22,7 @@ dbconnection();
 
 // routers
 app.use("/",userRouter);
-// app.use("/admin", adminRouter);
+app.use("/admin", adminRouter);
 app.use("/serviceProvider", serviceProviderRouter);
 
 

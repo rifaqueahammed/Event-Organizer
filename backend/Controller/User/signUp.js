@@ -7,8 +7,6 @@ module.exports = {
     signUp : (req,res)=>{
         try{
             const userData = req.body;
-            // eslint-disable-next-line no-console
-            console.log(userData)
             User.findOne({
                 $or: [
                   { email: userData.email },

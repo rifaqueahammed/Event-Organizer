@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
 import './App.css';
 // import LandinPage from './Pages/User/LandinPage';
-import User from './Routes/User';
 import ServiceProvider from './Routes/ServiceProvider';
 import LandinPage from './Pages/User/LandinPage';
+import Admin from './Routes/Admin';
+import User from './Routes/User';
 
 
 
@@ -14,7 +15,8 @@ function App() {
       <Routes>
         <Route path='/' element={<LandinPage/>}></Route>
         <Route path='/user' element={<User/>}></Route>
-        <Route path='/serviceprovider' element={<ServiceProvider/>}></Route>
+        <Route path='/serviceprovider/*' element={<ServiceProvider/>}></Route>
+        <Route path='/admin/*' element={<Admin/>}></Route>
       </Routes>
     </Router>
     </div>

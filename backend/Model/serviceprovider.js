@@ -22,8 +22,12 @@ const serviceProviderSchema = new mongoose.Schema({
   },
   isBlocked: {
     type: Boolean,
-    default: true,
+    default: false,
   },
+  isVerified:{
+    type: Boolean,
+    default:false
+  }
 });
 
 module.exports = mongoose.model("serviceProvider", serviceProviderSchema);
