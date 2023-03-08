@@ -1,21 +1,23 @@
-
-const User = require('../../Model/user')
+const ServiceProvider = require('../../Model/serviceprovider')
 
 module.exports = {
-    usersList : (req,res) =>{
+    deleteServiceProvider : (req,res)=>{
         try{
-            User.find().then((result)=>{
-                res.json(result)
+            ServiceProvider.deleteOne({_id:req.params.id}).then((result)=>{
+                if(result){
+                    res.json({success:true})
+                }
             })
-        }catch(error){
+            
+        }catch{
             // eslint-disable-next-line no-console
-            console.log(error)
+            console.log('error')
         }
     },
 
-    usersControll : (req,res) =>{
+    controllServiceProvider : (req,res)=>{
         try{
-            User.updateOne({_id:req.body.id},[
+            ServiceProvider.updateOne({_id:req.body.id},[
                 {$set:{
                     isBlocked:{
                         $cond:{
@@ -30,9 +32,10 @@ module.exports = {
                     res.json({success:true});
                 }
             })
-        }catch(error){
+            
+        }catch{
             // eslint-disable-next-line no-console
-            console.log(error)
+            console.log('error')
         }
     }
 }

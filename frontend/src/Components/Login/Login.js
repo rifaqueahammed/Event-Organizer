@@ -57,7 +57,7 @@ function Login() {
         password : form.password
     }).then((response) => {
       if(response.data.auth){
-        navigate('/user');
+        navigate('/');
       }
     });
    }
@@ -101,7 +101,7 @@ function Login() {
                     Password
                   </label>
                   <input value={form.password}  onChange={onUpdateField} name="password" className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************"></input>
-                  <p className="text-red-500 text-xs italic">Please Enter your password.</p>
+                  {/* <p className="text-red-500 text-xs italic">Please Enter your password.</p> */}
                   </div>
                   <p className="error text-red-500">{formErrors.password}</p>
                   <div className="flex items-center justify-between">

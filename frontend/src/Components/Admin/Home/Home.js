@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Dashboard from '../Dashboard/Dashboard'
 import Users from '../Users/Users'
 import ServiceProviders from '../ServiceProviders/ServiceProviders';
 import Requests from '../ServiceProviders/Requests'
@@ -7,14 +8,19 @@ import Requests from '../ServiceProviders/Requests'
 
 function Home() {
     const menu = [
-        {name:"Dashbord",component:'Dashbord',icon:"fa-solid fa-gauge"},
+        {name:"Dashboard",component:'Dashboard',icon:"fa-solid fa-gauge"},
         {name:"Users", component:'Users',icon:"fa-solid fa-users"},
         {name:"ServiceProviders",component:'ServiceProviders',icon:"fa-solid fa-briefcase"},
-        {name:"Inbox",component:'Inbox',icon:"fa-solid fa-envelope"},
         {name:"Requests",component:'Requests',icon:"fa-solid fa-paper-plane"},
     ]
     const [open,setOpen] = useState(true);
     const [component,setComponent] = useState('');
+    const navigate = useNavigate();
+
+    const logout = (()=>{
+      localStorage.removeItem("adminToken");
+      navigate('/admin');
+    })
 
   return (
     <div className='font-Montserrat w-full'>
@@ -38,14 +44,16 @@ function Home() {
                     </button> 
                     ))
                 }
-                 <Link to="/" className={`group flex items-center text-sm font-medium gap-3.5 p-2 hover:bg-gray-500 rounded-md`}>
+                 <button onClick={logout} className={`group flex items-center text-sm font-medium gap-3.5 p-2 hover:bg-gray-500 rounded-md`}>
                      <div><i className="fa-solid fa-power-off"></i></div>
                      <h2 style={{transitionDelay:`${9}00ms`}} className={`whitespace-pre duration-500 ${ !open && 'opacity-0 translate-x-28 overflow-hidden'}`}>Logout</h2>
                      <h2 className={`${open && 'hidden'} absolute left-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 duration-300 group-hover:w-fit`}>Logout</h2>
-                </Link> 
+                </button> 
                </div>
             </div>
             <div className='w-full mr-10 mt-5'>
+             {component === '' && <Dashboard/>}
+             {component === 'Dashboard' && <Dashboard/>}
              {component === 'Users' && <Users/>}
              {component === 'ServiceProviders' && <ServiceProviders/>}
              {component === 'Requests' && <Requests/>}

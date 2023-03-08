@@ -4,7 +4,7 @@ module.exports = {
 
     joinRequests : (req,res) =>{
         try{
-            ServiceProvider.find({isVerified:false}).then((result)=>{
+            ServiceProvider.find({password:{ $exists: false }}).then((result)=>{
                res.json(result);
             })
 

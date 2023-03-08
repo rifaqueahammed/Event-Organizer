@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import axios from '../../../axios'
+import {getUsers,userControll} from '../../../Services/Admin'
 
 function Users() {
     const [users,setUsers] = useState([]);
     useEffect(()=>{
-      axios.get('/admin/users').then((response)=>{
+     getUsers().then((response)=>{
         const users = response.data;
-        setUsers(users)
-      })
+        setUsers(users);
+      }).catch((error)=>{
+        console.log(error)
+      });
     },[]);
 
-//    const userController = ((userId)=>{
-//       axios.post()
-//    });
+   const userController = ((userId)=>{
+    const userID = {
+        id:userId
+      }
+     userControll(userID).then((response)=>{
+        if(response.data.success){
+            getUsers().then((response)=>{
+                const users = response.data;
+                setUsers(users)
+              })
+            }
+        })
+    });
 
   return (
   <div>
@@ -60,8 +72,9 @@ function Users() {
                 {user.phone}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                {!user.isBlocked ? <button  className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>Block</button> : <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>UnBlock</button>}
-                {/* onClick={()=>userController(user._id)} */}
+                {/* {!user.isBlocked ? <button  className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>Block</button> : <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>UnBlock</button>} */}
+                <button onClick={()=>userController(user._id)} className={`w-full text-white font-bold py-2 px-4 rounded ${!user.isBlocked ? 'bg-red-500 hover:bg-red-700' : 'bg-green-500 hover:bg-green-700'}`} >{!user.isBlocked ?'Block' : 'UnBlock'}</button>
+               
                 </td>
             </tr>
 

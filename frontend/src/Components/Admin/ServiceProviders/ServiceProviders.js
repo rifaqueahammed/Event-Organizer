@@ -1,20 +1,35 @@
 import React, { useState, useEffect } from 'react'
-import axios from '../../../axios'
+import {getServiceProviders,serviceProviderControll} from '../../../Services/Admin'
 
 function ServiceProviders() {
     const [ServiceProviders,setServiceProviders] = useState([]);
     
     useEffect(()=>{
-      axios.get('/admin/serviceProviders').then((response)=>{
+      getServiceProviders().then((response)=>{
         const serviceProviders = response.data;
         setServiceProviders(serviceProviders)
       })
     },[]);
 
+    const serviceProviderController = ((id)=>{
+      const serviceProviderID = {
+        id:id
+      }
+     serviceProviderControll(serviceProviderID).then((response)=>{
+      if(response.data.success){
+        getServiceProviders().then((response)=>{
+          const serviceProviders = response.data;
+          setServiceProviders(serviceProviders)
+        })
+      }
+     })
+
+    })
+
 
   return (
   <div>
-    <div className='text-center font-semibold mb-10'><h2>Users Management</h2></div>
+    <div className='text-center font-semibold mb-10'><h2>Service Providers Management</h2></div>
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -58,8 +73,7 @@ function ServiceProviders() {
                 {ServiceProvider.phone}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                {!ServiceProvider.isBlocked ? <button  className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>Block</button> : <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>UnBlock</button>}
-                {/* onClick={()=>userController(user._id)} */}
+                 <button onClick={()=>serviceProviderController(ServiceProvider._id)} className={`w-full text-white font-bold py-2 px-4 rounded ${!ServiceProvider.isBlocked ? 'bg-red-500 hover:bg-red-700' : 'bg-green-500 hover:bg-green-700'}`} >{!ServiceProvider.isBlocked ?'Block' : 'UnBlock'}</button>
                 </td>
             </tr>
 
