@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from '../../axios'
+import axios from '../../../axios'
 
 function SignUp() {
     const [showModal, setShowModal] = useState(true);
@@ -12,6 +12,7 @@ function SignUp() {
     });
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
+    const [error,setError] = useState('');
     
     // values updations
     const onUpdateField = (e) => {
@@ -80,7 +81,12 @@ function SignUp() {
         phone : form.phone,
         password : form.password
     }).then((response) => {
-
+      if(response.data.success){
+       setShowModal(false);
+      }else if(response.data.error){
+        console.log(response.data)
+        setError(response.data.error);
+      }
     });
    }
   });
@@ -88,7 +94,7 @@ function SignUp() {
 
 
   return (
-    <div className='w-screen md:w-auto'>
+   <div className='w-screen md:w-auto'>
         {showModal ? (
       <>
         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto relative inset-0 z-50 outline-none focus:outline-none transition ease-in delay-500">
@@ -113,6 +119,9 @@ function SignUp() {
               
               {/*body*/}
               <div>
+              <div className='text-center'>
+                       <h1 className='error font-bold text-red-500 mt-5 text center'>{error}</h1>
+                  </div>
               <form onSubmit={onSubmitForm} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" for="name">
@@ -162,7 +171,7 @@ function SignUp() {
     </>
     ) : null}
   </div>
-  )
+)
 }
 
 export default SignUp

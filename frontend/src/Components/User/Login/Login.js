@@ -1,6 +1,9 @@
 import React, { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import axios from '../../axios'
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreaters } from '../../../Store/Redux/Store/index';
+import { userLogin } from '../../../Services/User';
 
 function Login() {
     const navigate = useNavigate();
@@ -11,6 +14,9 @@ function Login() {
     })
     const [formErrors,setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
+    const [error,setError] = useState('');
+    const dispatch = useDispatch();
+    const {UserData} = bindActionCreators(actionCreaters,dispatch);
 
     // values updations
     const onUpdateField = (e) => {
@@ -50,15 +56,26 @@ function Login() {
     return errors;
    }
 
+
    useEffect(()=>{
     if (Object.keys(formErrors).length === 0 && isSubmit){
-      axios.post('/login', {
+      const data = {
         email : form.email,
         password : form.password
-    }).then((response) => {
-      if(response.data.auth){
-        navigate('/');
       }
+      userLogin(data).then((response) => {
+      if(response.data.auth){
+        localStorage.setItem("userToken",response.data.token);
+        const user = {
+          id:response.data.payLoad.id,
+          email:response.data.payLoad.email,
+          username:response.data.payLoad.username
+        } 
+        UserData(user)
+        navigate('/user');
+      }else if(response.data.error){
+        setError(response.data.error)
+       }
     });
    }
   });
@@ -101,13 +118,15 @@ function Login() {
                     Password
                   </label>
                   <input value={form.password}  onChange={onUpdateField} name="password" className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************"></input>
-                  {/* <p className="text-red-500 text-xs italic">Please Enter your password.</p> */}
                   </div>
                   <p className="error text-red-500">{formErrors.password}</p>
                   <div className="flex items-center justify-between">
                     <button className="bg-[#513B3B]  hover:bg-blue-700 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                       Continue
                     </button>
+                  </div>
+                  <div className='text-center'>
+                       <h1 className='error text-red-500 mt-5 text center'>{error}</h1>
                   </div>
               </form>
               <div className='text-xl text-center font-bold'>

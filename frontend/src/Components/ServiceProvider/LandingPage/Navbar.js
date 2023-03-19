@@ -1,19 +1,11 @@
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom";
-import Login from '../Login/Login'
-import SignUp from '../SignUp/SignUp';
+import { Link } from "react-router-dom";
+import Login from '../LandingPage/Login'
+
 
 function Navbar() {
 const [open,setOpen] = useState(false);
-const navigate = useNavigate()
 const [showLogin,setShowLogin] = useState(false);
-const [showSignUp,setShowSignUp] = useState(false);
-// const [user,setUser] = useState(true);
-
-const registerAsProvider =()=>{
-  // setUser(!user)
-  navigate('/serviceprovider')
-}
 
   return (
     <div className=''>
@@ -27,17 +19,12 @@ const registerAsProvider =()=>{
         </div>
         <ul className={`absolute md:static flex flex-col md:flex-row justify-between 
         md:p-5 md:mt-10 text-white  transition-all duration-500 ease-in md:transition-none ${open ? `top-20 p-8 mt-5 text-lg opacity-100`:` top-[-490px]`}`}>
-            {/* { user ? <li><button className='mt-2 md:mt-0 md:ml-5 cursor-pointer' onClick={()=>registerAsProvider()}>Register as A Service Provider</button></li> : <li><button className='mt-2 md:mt-0 md:ml-5 cursor-pointer' onClick={()=>setUser(!user)}>Register as User</button></li> } */}
-            <li><button className='mt-2 md:mt-0 md:ml-5 cursor-pointer' onClick={()=>registerAsProvider()}>Register as A Service Provider</button></li>
-            <li><button className='mt-2 md:mt-0 md:ml-5 cursor-pointer' onClick={()=>setShowSignUp(!showSignUp)}>SignUp</button></li>
+            <Link to='/'><li><button className='mt-2 md:mt-0 md:ml-5 cursor-pointer'>Login as a User</button></li> </Link>
             <li><button className='mt-2 md:mt-0 md:ml-5 cursor-pointer' onClick={()=>setShowLogin(!showLogin)}>Login</button></li>
         </ul>
     </nav> 
     <div className='absolute inset-y-0 right-0 mt-0'>
     {showLogin ? <Login/> :''}
-    </div>
-    <div className='absolute inset-y-0 right-0 mt-0'>
-    {showSignUp ? <SignUp/> :''}
     </div>  
     </div>
   )

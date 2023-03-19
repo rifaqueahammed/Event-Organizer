@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 import axios from '../../../axios'
 
 function SignUp() {
-    const navigate = useNavigate(); 
+ 
     const [form, setForm] = useState({
         companyname: "",
         email: "",
         phone:"",
       });
-      const [formErrors, setFormErrors] = useState({})
+      const [formErrors, setFormErrors] = useState({});
       const [isSubmit, setIsSubmit] = useState(false);
+      const [message,setMessage] = useState('');
+      const [error,setError] = useState('');
 
     // values updations
     const onUpdateField = (e) => {
@@ -61,22 +62,28 @@ function SignUp() {
             phone : form.phone,
          }).then((result)=>{
             if(result.data.success){
-              navigate('/serviceprovider')
-            }
+              setMessage("Welcome to EVENT ORGANIZER Our Professional Meet You Soon");
+            }else if(result.data.error){
+              setError(result.data.error)
+             }
          })
        }
       });
 
   return (
-    <div className='w-full text-center  bg-gradient-to-r from-[#513B3B] to-cyan-900 rounded-lg'>
+    <div>
+      {!message && <div className='w-full text-center  bg-gradient-to-r from-[#513B3B] to-cyan-900 rounded-lg'>
         <h1 className='font-bold text-xl text-white p-3'>Join With Event Organizer and Grow your Business</h1>
+        <div className='text-center'>
+              <h1 className='error text-red-500 mt-5 text center'>{error}</h1>
+        </div>
         <form onSubmit={onSubmitForm} className='md:flex p-4 justify-between'>
           <div>
             <input value={form.companyname} onChange={onUpdateField} name="companyname" className="m-2 shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="companyname" type="text" placeholder="Company Name"/>
             <p className="error text-red-700">{formErrors.companyname}</p>
           </div>
           <div>
-            <input value={form.email} onChange={onUpdateField} name="email" className="m-2 shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="email"/>
+            <input value={form.email} onChange={onUpdateField} name="email" className="m-2 shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email1" type="text" placeholder="email"/>
             <p className="error text-red-700">{formErrors.email}</p>
           </div>
           <div>
@@ -87,7 +94,13 @@ function SignUp() {
            <button type="submit" className="m-2 text-xl text-blue-700 hover:bg-blue-700 hover:text-white font-bold  py-2 px-4 border bg-white border-white-500 rounded">Get in touch</button>
           </div>
         </form>
+    </div>}
+    {message && <div className='text-3xl font-bold md:text-white break-words text-center text-green-500 '>
+      <h1>{message}</h1>
+    </div>}
+
     </div>
+    
   )
 }
 

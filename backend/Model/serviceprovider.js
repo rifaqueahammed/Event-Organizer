@@ -20,6 +20,35 @@ const serviceProviderSchema = new mongoose.Schema({
   password: {
     type: String,
   },
+  licence_number:{
+    type:String,
+  },
+  ownername:{
+    type:String,
+  },
+  address :{
+    line1:{
+      type:String,
+    },
+    state:{
+      type:String,
+    },
+    pincode:{
+      type:Number,
+    }
+  },
+  
+  hq:{
+      type:String,
+    },
+  locations :[
+    {
+      place:{
+        type:String,
+      }
+    }
+  ],
+    
   isBlocked: {
     type: Boolean,
     default: false,

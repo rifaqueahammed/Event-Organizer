@@ -14,7 +14,7 @@ function App() {
      <Router>
       <Routes>
         <Route path='/' element={<LandinPage/>}></Route>
-        <Route path='/user' element={<User/>}></Route>
+        <Route path='/user/*' element={<User/>}></Route>
         <Route path='/serviceprovider/*' element={<ServiceProvider/>}></Route>
         <Route path='/admin/*' element={<Admin/>}></Route>
       </Routes>
