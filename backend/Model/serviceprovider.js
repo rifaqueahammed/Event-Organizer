@@ -48,6 +48,39 @@ const serviceProviderSchema = new mongoose.Schema({
       }
     }
   ],
+
+  logo_image: {
+    name: {
+      type: String,
+    },
+    path: {
+      type: String,
+    },
+  },
+  
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+
+  services:[{
+    name:{
+      type:String
+    },
+    description:{
+      type:String
+    },
+    images:[
+      {
+        filename:{
+          type:String
+        },
+        path:{
+          type:String
+        }
+      }
+    ]
+  }],
     
   isBlocked: {
     type: Boolean,

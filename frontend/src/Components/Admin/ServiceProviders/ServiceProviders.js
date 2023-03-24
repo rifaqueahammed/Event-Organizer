@@ -17,6 +17,9 @@ function ServiceProviders() {
       }
      serviceProviderControll(serviceProviderID).then((response)=>{
       if(response.data.success){
+        if(response.data.isBlocked){
+          localStorage.removeItem("serviceproviderToken");
+        }
         getServiceProviders().then((response)=>{
           const serviceProviders = response.data;
           setServiceProviders(serviceProviders)

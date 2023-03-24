@@ -7,10 +7,11 @@ import Authorization from '../Components/Admin/Authorization/Authorization';
 
 
 function AdminRouter() {
+ 
   return (
     <div>
        <Routes>
-            <Route path='/' element={<Login/>}></Route>
+            <Route path='/' element={<Authorization><Login/></Authorization>}></Route>
             <Route path='/home' element={<Authorization><AdminPage/></Authorization>}></Route>
             <Route path='/error' element={<Errorpage/>}></Route>
        </Routes>

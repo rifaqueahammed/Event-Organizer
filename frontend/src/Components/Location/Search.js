@@ -1,9 +1,10 @@
 import React from 'react'
 
-function Location() {
+
+function Search() {
   return (
     <div className='md:absolute inset-y-1/3 md:inset-y-2/3 m-2 md:m-0'>
-    <div className='w-full text-center bg-gray-100 shadow-lg rounded-lg'>
+    <div className='w-full text-center bg-white shadow-lg shadow-gray-100/10 rounded-lg'>
       <form  className='md:flex p-4 justify-between'>
         <div>
           <input name="service_name" className="m-2 shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="service_name" type="text" placeholder="Service Name"/>
@@ -17,4 +18,4 @@ function Location() {
   )
 }
 
-export default Location
+export default Search

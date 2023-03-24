@@ -18,6 +18,9 @@ function Users() {
       }
      userControll(userID).then((response)=>{
         if(response.data.success){
+            if(response.data.isBlocked){
+              localStorage.removeItem("userToken");
+            }
             getUsers().then((response)=>{
                 const users = response.data;
                 setUsers(users)

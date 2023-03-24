@@ -15,7 +15,7 @@ module.exports = {
 
     usersControll : (req,res) =>{
         try{
-            User.updateOne({_id:req.body.id},[
+            User.findOneAndUpdate({_id:req.body.id},[
                 {$set:{
                     isBlocked:{
                         $cond:{
@@ -25,9 +25,10 @@ module.exports = {
                         }
                     }
                 }}
-            ]).then((result)=>{
+            ],{new: true}).then((result)=>{
                 if(result){
-                    res.json({success:true});
+                    const {isBlocked} = result;
+                    res.json({success:true,isBlocked});
                 }
             })
         }catch(error){

@@ -35,14 +35,22 @@ export const serviceProviderLogin = (data)=>{
     return axios.post('/serviceProvider/login',data);
 }
 
-export const getServiceProvider = (id)=>{
-  return axios.get(`/serviceProvider/profile/${id}`);
+export const getServiceProvider = ()=>{
+  return axios.get('/serviceProvider/profile');
 }
 
-export const editServiceProvider = (id,data)=>{
-  return axios.patch('serviceProvider/editprofile',id,data);
+export const editServiceProvider = (data)=>{
+  return axios.patch('serviceProvider/editprofile',data);
 }
 
 export const Changepassword = (data)=>{
   return axios.patch('serviceProvider/changePassword',data);
+}
+
+export const addService = (data,headers)=>{
+  return axios.post('serviceProvider/addService',data,headers);
+}
+
+export const getServices = ()=>{
+  return axios.get('serviceprovider/getServices');
 }

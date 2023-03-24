@@ -129,7 +129,7 @@ function Login() {
                        <h1 className='error text-red-500 mt-5 text center'>{error}</h1>
                   </div>
               </form>
-              <div className='text-xl text-center font-bold'>
+              {/* <div className='text-xl text-center font-bold'>
                 <h1>OR</h1>
                 <div>
                 <div className="m-3">
@@ -139,7 +139,7 @@ function Login() {
                     </button>
                 </div>
                 </div>
-              </div>
+              </div> */}
 
               </div>
               

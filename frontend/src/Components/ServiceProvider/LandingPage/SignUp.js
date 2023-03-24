@@ -71,7 +71,7 @@ function SignUp() {
       });
 
   return (
-    <div>
+    <div className='md:absolute inset-y-1/3 md:inset-y-2/3 m-2 md:m-0'>
       {!message && <div className='w-full text-center  bg-gradient-to-r from-[#513B3B] to-cyan-900 rounded-lg'>
         <h1 className='font-bold text-xl text-white p-3'>Join With Event Organizer and Grow your Business</h1>
         <div className='text-center'>
@@ -91,7 +91,7 @@ function SignUp() {
             <p className="error text-red-700">{formErrors.phone}</p>
           </div>
           <div className=''>
-           <button type="submit" className="m-2 text-xl text-blue-700 hover:bg-blue-700 hover:text-white font-bold  py-2 px-4 border bg-white border-white-500 rounded">Get in touch</button>
+           <button type="submit" className="m-2 text-xl text-blue-700 hover:bg-blue-700 hover:text-white font-bold  py-1 px-4 border bg-white border-white-500 rounded">Get in touch</button>
           </div>
         </form>
     </div>}

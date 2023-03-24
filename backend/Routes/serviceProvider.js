@@ -4,12 +4,16 @@ const router = express.Router();
 const signUpController = require('../Controller/ServiceProvider/signUp')
 const loginController = require('../Controller/ServiceProvider/Login')
 const ProfileController = require('../Controller/ServiceProvider/Profile')
+const ServiceController = require('../Controller/ServiceProvider/Services')
 const VerifyServiceProvider = require('../Middlewares/Authorization')
+const upload = require('../Middlewares/Cloudinary')
 
 router.post('/joinrequest',signUpController.joinRequest);
 router.post('/login',loginController.serviceProviderLogin);
-router.get('/profile/:id',VerifyServiceProvider.verify,ProfileController.getprofile);
-router.patch('/editprofile',VerifyServiceProvider.verify,ProfileController.editProfile);
+router.get('/profile',VerifyServiceProvider.verify,ProfileController.getprofile);
+router.patch('/editprofile',VerifyServiceProvider.verify,upload.single('logo_image'),ProfileController.editProfile);
 router.patch('/changePassword',VerifyServiceProvider.verify,ProfileController.changePassword);
+router.post('/addService',VerifyServiceProvider.verify,upload.array('images',5),ServiceController.addService);
+router.get('/getServices',VerifyServiceProvider.verify,ServiceController.getServices);
 
 module.exports = router;

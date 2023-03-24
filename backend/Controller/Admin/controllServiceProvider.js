@@ -17,7 +17,7 @@ module.exports = {
 
     controllServiceProvider : (req,res)=>{
         try{
-            ServiceProvider.updateOne({_id:req.body.id},[
+            ServiceProvider.findOneAndUpdate({_id:req.body.id},[
                 {$set:{
                     isBlocked:{
                         $cond:{
@@ -26,13 +26,14 @@ module.exports = {
                             else: true
                         }
                     }
-                }}
-            ]).then((result)=>{
+                }},
+            ],
+            {new: true}).then((result)=>{
                 if(result){
-                    res.json({success:true});
+                    const {isBlocked} = result;
+                    res.json({success:true,isBlocked});
                 }
             })
-            
         }catch{
             // eslint-disable-next-line no-console
             console.log('error')

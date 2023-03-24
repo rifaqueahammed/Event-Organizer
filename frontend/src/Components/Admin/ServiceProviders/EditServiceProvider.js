@@ -23,6 +23,7 @@ function EditServiceProvider() {
       }else if(status.reject){
         deleteServiceProvider(id).then((result)=>{
           if(result.data.success){
+            
             setShowModal(false)
             getJoinRequests().then((response)=>{
               const serviceProviders = response.data;

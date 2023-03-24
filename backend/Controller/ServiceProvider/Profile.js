@@ -5,8 +5,8 @@ module.exports = {
 
     getprofile : (req,res)=>{
         try{
-            const {id} = req.params;
-            ServiceProvider.findOne({_id:id}).then((result)=>{
+            // const {id} = req.params;
+            ServiceProvider.findOne({_id:req.id}).then((result)=>{
                if(result){
                 const data = {
                     // eslint-disable-next-line no-underscore-dangle
@@ -19,7 +19,10 @@ module.exports = {
                     hq:result.hq,
                     line1:result.address.line1,
                     state:result.address.state,
-                    pincode:result.address.pincode
+                    pincode:result.address.pincode,
+                    logo_image:result.logo_image.path,
+                    logo_image_name:result.logo_image.name,
+                    services:result.services
                 }
                 res.json(data);
                }
@@ -33,8 +36,10 @@ module.exports = {
     
     editProfile : (req,res)=>{
         try{
+            const imagePath = req?.file?.path ? req.file.path : req.body.logo_image;
+            const imageName = req?.file?.filename ? req.file.filename : req.body.logo_image_name;
            // eslint-disable-next-line no-underscore-dangle
-           ServiceProvider.findOneAndUpdate({_id:req.body._id},
+           ServiceProvider.findOneAndUpdate({_id:req.id},
             {$set:{
                 licence_number:req.body.licence_number,
                 companyname:req.body.companyname,
@@ -45,6 +50,10 @@ module.exports = {
                     line1:req.body.line1,
                     state:req.body.state,
                     pincode:req.body.pincode
+                },
+                logo_image:{
+                    name:imageName,
+                    path:imagePath,
                 }
             }}).then((result)=>{
                 if(result){
@@ -79,5 +88,5 @@ module.exports = {
             // eslint-disable-next-line no-console
             console.log('error');
         }
-    }
+    },
 }

@@ -38,7 +38,7 @@ function Home() {
   return (
     <div className='font-Montserrat w-full'>
         <section className='flex'>
-            <div className={`bg-gradient-to-r from-[#513B3B] to-cyan-900 min-h-screen ${open ?'w-72':'w-16'} duration-500`}>
+            <div className={`fixed md:static z-30 bg-gradient-to-r from-[#513B3B] to-cyan-900 min-h-screen ${open ?'w-72':'w-16'} duration-500`}>
             <div className='flex justify-between'>
                 <div className={`${!open && 'hidden'} text-lg text-white italic cursor-pointer p-3 duration-500 font-semibold`}>
                  <h1 className=''>Event</h1>
@@ -63,8 +63,7 @@ function Home() {
                      </button>
                     ))}
                   </>
-                    
-                    ))
+                  ))
                 }
                  <button onClick={logout} className={`group flex items-center text-sm font-medium gap-3.5 p-2 hover:bg-gray-500 rounded-md`}>
                      <div><i className="fa-solid fa-power-off"></i></div>
@@ -73,7 +72,7 @@ function Home() {
                 </button> 
                </div>
             </div>
-            <div className='w-full'>
+            <div className='relative md:static ml-8 md:ml-0 w-full '>
               <div className='w-full h-10 shadow-xl text-end'><h1 className='mr-4'>{profile}</h1></div>
              <div className='w-full mr-10 mt-5'>
               {component === '' && <Dashboard/>}

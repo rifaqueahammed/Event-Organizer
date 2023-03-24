@@ -9,7 +9,9 @@ function LandinPage() {
     <div className=''>
         <Fragment>
             <div className='relative'><Home/></div>
-            <div className='m-3 md:absolute inset-y-1/3 md:inset-y-2/3 md:left-40 md:m-0'><SignUp/></div>
+            <div className='w-full flex justify-center'>
+              <SignUp/>
+            </div>
             <Description/>
             <Footer/>
         </Fragment>

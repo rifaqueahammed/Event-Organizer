@@ -9,8 +9,8 @@ import Requests from '../ServiceProviders/Requests'
 function Home() {
     const menu = [
         {name:"Dashboard",component:'Dashboard',icon:"fa-solid fa-gauge"},
-        {name:"Users", component:'Users',icon:"fa-solid fa-users"},
         {name:"ServiceProviders",component:'ServiceProviders',icon:"fa-solid fa-briefcase"},
+        {name:"Users", component:'Users',icon:"fa-solid fa-users"},
         {name:"Requests",component:'Requests',icon:"fa-solid fa-paper-plane"},
     ]
     const [open,setOpen] = useState(true);

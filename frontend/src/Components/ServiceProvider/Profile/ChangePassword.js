@@ -56,7 +56,6 @@ function ChangePassword() {
         if(Object.keys(formErrors).length === 0 && isSubmit ){
           const data = form;
           Changepassword(data).then((response)=>{
-            console.log(response)
             if(response.data.updated){
                 message.success("Password Changed")
             }

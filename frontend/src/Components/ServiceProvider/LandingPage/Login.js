@@ -74,6 +74,7 @@ function Login() {
         ServiceProviderData(serviceProvider);
         navigate('/serviceprovider/home');
       }else if(response.data.error){
+        console.log(response.data.error)
         setError(response.data.error)
        }
     });
@@ -85,10 +86,10 @@ function Login() {
     <>
     {showModal ? (
       <>
-        <div className="w-screen md:w-auto justify-center items-center flex overflow-x-hidden overflow-y-auto relative inset-0 z-50 outline-none focus:outline-none">
-          <div className="relative w-auto my-6 mx-auto max-w-3xl">
+        <div className="w-screen md:relative md:w-auto justify-center items-center flex overflow-x-hidden overflow-y-auto inset-0  outline-none focus:outline-none">
+          <div className=" w-auto my-6 mx-auto max-w-3xl">
             {/*content*/}
-            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <div className="border-0 rounded-lg shadow-lg flex flex-col w-full bg-white outline-none focus:outline-none">
               {/*header*/}
               <div className='flex'>
               <button
@@ -129,7 +130,7 @@ function Login() {
                        <h1 className='error text-red-500 mt-5 text center'>{error}</h1>
                   </div>
               </form>
-              <div className='text-xl text-center font-bold'>
+              {/* <div className='text-xl text-center font-bold'>
                 <h1>OR</h1>
                 <div>
                 <div className="m-3">
@@ -139,7 +140,7 @@ function Login() {
                     </button>
                 </div>
                 </div>
-              </div>
+              </div> */}
 
               </div>
               

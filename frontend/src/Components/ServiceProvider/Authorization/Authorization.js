@@ -1,15 +1,14 @@
-
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 function Authorization({children}) {
     const navigate = useNavigate();
     useEffect(() => {
-        if (localStorage.getItem('adminToken')) {
-            navigate('/admin/home');
+        if (localStorage.getItem('serviceproviderToken')) {
+            navigate('/serviceprovider/home');
         }
         else{
-            navigate('/admin'); 
+            navigate('/serviceprovider'); 
         }
     },[navigate])
     return children
