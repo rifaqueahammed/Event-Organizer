@@ -35,6 +35,14 @@ export const userLogin = (data)=>{
   return axios.post('/login',data);
 }
 
+export const userSignUp = (data)=>{
+  return axios.post('/signUp',data);
+}
+
+export const otpVerification = (data)=>{
+  return axios.post('/verifyOtp',data);
+}
+
 // export const userhomePage = (userId)=>{
 //   return axios.get(`/userhome/${userId}`);
 // }

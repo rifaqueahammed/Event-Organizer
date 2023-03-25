@@ -8,6 +8,7 @@ const homepageController = require('../Controller/User/Homepage')
 
 
 router.post('/signUp',signUpController.signUp);
+router.post('/verifyOtp',signUpController.verifyOtp);
 router.post('/login',loginController.userLogin);
 router.get('/userhome/:id',VerifyUser.verify,homepageController.gethomepage)
 

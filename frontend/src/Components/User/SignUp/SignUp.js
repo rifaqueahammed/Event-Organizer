@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import axios from '../../../axios'
+import { userSignUp } from '../../../Services/User';
+import {otpVerification} from '../../../Services/User'
+import {  message } from 'antd';
+
 
 function SignUp() {
     const [showModal, setShowModal] = useState(true);
@@ -13,6 +16,9 @@ function SignUp() {
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
     const [error,setError] = useState('');
+    const [otpPage,setOtpPage] = useState(false);
+    const [otp,setOtp] = useState('');
+    const [otperror,setOtpError] = useState('');
     
     // values updations
     const onUpdateField = (e) => {
@@ -75,25 +81,43 @@ function SignUp() {
 
   useEffect(()=>{
     if (Object.keys(formErrors).length === 0 && isSubmit){
-      axios.post('/signUp', {
+      const data = {
         username :form.username,
         email : form.email,
         phone : form.phone,
         password : form.password
-    }).then((response) => {
+      }
+      userSignUp(data).then((response) => {
       if(response.data.success){
-       setShowModal(false);
+       setOtpPage(true);
       }else if(response.data.error){
-        console.log(response.data)
         setError(response.data.error);
       }
     });
    }
-  });
-   
+  },[form.email, form.password, form.phone, form.username, formErrors, isSubmit, setOtpPage]);
 
-
-  return (
+  const verifyOTP = (e)=>{
+     e.preventDefault();
+     const data = {
+      otp:otp,
+      email:form.email
+     }
+     otpVerification(data).then((response)=>{
+        if(response.data.success){
+          message.success("Plese Continue to Login");
+          setShowModal(false);
+        }
+        else if (response.data.error){
+          setOtpError(response.data.error);
+          setTimeout(function () {
+            setShowModal(false);
+        }, 5000)
+        }
+     })
+    
+  }
+return (
    <div className='w-screen md:w-auto'>
         {showModal ? (
       <>
@@ -114,15 +138,14 @@ function SignUp() {
                   Please Login Continue
                 </h6>
               </div>
-
-              </div>
+            </div>
               
               {/*body*/}
               <div>
               <div className='text-center'>
                        <h1 className='error font-bold text-red-500 mt-5 text center'>{error}</h1>
                   </div>
-              <form onSubmit={onSubmitForm} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+              {!otpPage && <form onSubmit={onSubmitForm} className="bg-white shadow-md rounded px-8 pb-8 mb-4">
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" for="name">
                     Your Name
@@ -163,7 +186,23 @@ function SignUp() {
                       Continue
                     </button>
                   </div>
-              </form>
+              </form>}
+              {otpPage && 
+              <form onSubmit={verifyOTP} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+              <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" for="otp">
+                      Enter One Time Password
+                  </label>
+                  <input value={otp} name="otp" onChange={(e)=>setOtp(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="otp" type="text" placeholder="Enter OTP"></input>
+              </div>
+              <p className="error text-red-500">{otperror}</p>
+              <div className="flex items-center justify-between">
+                  <button className="bg-[#513B3B]  hover:bg-blue-700 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                     Submit
+                  </button>
+             </div>
+             </form>
+              }
             </div>
           </div>
         </div>

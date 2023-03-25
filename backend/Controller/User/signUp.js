@@ -1,6 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const bcrypt = require("bcrypt");
-const User = require('../../Model/user')
+const User = require('../../Model/user');
+const  mailer = require('../../Middlewares/nodemailer');
+const Otp = require('../../Model/otp');
 
 module.exports = {
 
@@ -27,16 +29,57 @@ module.exports = {
                       password: userData.password,
                     });
                     newUser.save().then(() => {
-                      res.json({success:true});
+                      const OTP = `${Math.floor(1000 + Math.random() * 9000)}`;
+                      const mailDetails = {
+                        from: process.env.NODMAILER_EMAIL,
+                        to: req.body.email,
+                        subject: "Event Organizer OTP login",
+                        html: `<p>Your OTP For Event Organizer login is ${OTP}</p>`,
+                      };
+                      mailer.mailTransporter.sendMail(mailDetails, (err) => {
+                        if (err) {
+                          // eslint-disable-next-line no-console
+                          console.log(err);
+                        } else {
+                          const newOtp = new Otp({
+                            otp: OTP,
+                            email: req.body.email,
+                          });
+                          newOtp.save().then(() => {
+                            res.json({ success:true });
+                          });
+                        }
+                      });
                     });
-                }
-            })
-        }
+                  }
+                })
+              }
         catch{
             // eslint-disable-next-line no-console
             console.log('errror');
+          }
+        },
+
+        verifyOtp:(req,res)=>{
+          try{
+              Otp.findOne( {$and: [{ email: req.body.email },{ otp:req.body.otp }]}).then((result)=>{
+               if(result){
+                  User.updateOne({email: req.body.email},{$set:{isVeryfied:true}}).then((response)=>{
+                  if(response){
+                    res.json({success:true});
+                  }
+                })
+               }else{
+                User.deleteOne({ email: req.body.email}).then(()=>{
+                  Otp.deleteOne({ email: req.body.email}).then(()=>{
+                    res.json({error:'Wrong OTP'});
+                  })
+                })
+               }
+              })
+          }catch(error){
+            // eslint-disable-next-line no-console
+            console.log(error)
+          }
         }
-
-    }
-
-}
+      };
