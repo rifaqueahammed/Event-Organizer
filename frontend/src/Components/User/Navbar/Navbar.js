@@ -1,10 +1,11 @@
-import React, { useState  } from 'react'
+import React, { useState ,useEffect  } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import Login from '../Login/Login'
 import SignUp from '../SignUp/SignUp';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreaters } from '../../../Store/Redux/Store/index';
+import { userRefresh } from '../../../Services/User'
 
 function Navbar() {
 const [open,setOpen] = useState(false);
@@ -13,9 +14,16 @@ const [showSignUp,setShowSignUp] = useState(false);
 const user = useSelector(state=>state.UserData.user);
 const navigate = useNavigate()
 const dispatch = useDispatch();
-const {removeUser} = bindActionCreators(actionCreaters,dispatch);
+const {removeUser,UserData} = bindActionCreators(actionCreaters,dispatch);
 
-
+useEffect(()=>{
+  if(localStorage.getItem("userToken")){
+    userRefresh().then((response)=>{
+      UserData(response.data)
+    })
+  }
+// eslint-disable-next-line react-hooks/exhaustive-deps
+},[])
 
 const logOut = (()=>{
   localStorage.removeItem("userToken");

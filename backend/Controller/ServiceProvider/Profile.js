@@ -1,11 +1,10 @@
-const bcrypt = require("bcrypt")
-const ServiceProvider = require('../../Model/serviceprovider')
+const bcrypt = require("bcrypt");
+const ServiceProvider = require('../../Model/serviceprovider');
 
 module.exports = {
 
     getprofile : (req,res)=>{
         try{
-            // const {id} = req.params;
             ServiceProvider.findOne({_id:req.id}).then((result)=>{
                if(result){
                 const data = {

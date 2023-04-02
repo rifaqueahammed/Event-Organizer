@@ -39,10 +39,26 @@ export const userSignUp = (data)=>{
   return axios.post('/signUp',data);
 }
 
+export const userRefresh = ()=>{
+  return axios.get('/userRefresh');
+}
+
 export const otpVerification = (data)=>{
   return axios.post('/verifyOtp',data);
 }
 
-// export const userhomePage = (userId)=>{
-//   return axios.get(`/userhome/${userId}`);
-// }
+export const getServiceProviders = (data)=>{
+  return axios.post('/search',data);
+} 
+
+export const getServiceProviderDetails = (id)=>{
+  return axios.get(`/serviceProviderDetails/${id}`);
+}
+
+export const addReview = (data)=>{
+  return axios.patch('/addReview',data);
+}
+
+export const getReviews = (id)=>{
+  return axios.get(`/getReviews/${id}`);
+}

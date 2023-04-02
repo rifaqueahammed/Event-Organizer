@@ -14,9 +14,9 @@ root.render(
   <React.StrictMode>
     <ModalContext>
       <ServiceModalContext>
-    <Provider store={Store}>
-       <App />
-    </Provider>
+          <Provider store={Store}>
+            <App />
+          </Provider>
     </ServiceModalContext>
     </ModalContext>
   </React.StrictMode>

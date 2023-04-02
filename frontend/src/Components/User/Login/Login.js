@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreaters } from '../../../Store/Redux/Store/index';
 import { userLogin } from '../../../Services/User';
+import {  message } from 'antd';
 
 function Login() {
     const navigate = useNavigate();
@@ -71,14 +72,15 @@ function Login() {
           email:response.data.payLoad.email,
           username:response.data.payLoad.username
         } 
-        UserData(user)
+        UserData(user);
+        message.success('Logged In Successfully');
         navigate('/user');
       }else if(response.data.error){
         setError(response.data.error)
        }
     });
    }
-  });
+  },[UserData, form.email, form.password, formErrors, isSubmit, navigate]);
 
     
   return (
@@ -129,17 +131,6 @@ function Login() {
                        <h1 className='error text-red-500 mt-5 text center'>{error}</h1>
                   </div>
               </form>
-              {/* <div className='text-xl text-center font-bold'>
-                <h1>OR</h1>
-                <div>
-                <div className="m-3">
-                    <button className="border-4 w-full text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                     <i className="fa-brands fa-google"></i>
-                      Continue
-                    </button>
-                </div>
-                </div>
-              </div> */}
 
               </div>
               

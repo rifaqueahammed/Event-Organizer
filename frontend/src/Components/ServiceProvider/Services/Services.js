@@ -12,7 +12,7 @@ const [services,setServices] = useState([]);
 
 useEffect(()=>{
   getServices().then((response)=>{
-    setServices(response.data)
+    setServices(response.data);
   })
 },[])
 

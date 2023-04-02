@@ -81,6 +81,24 @@ const serviceProviderSchema = new mongoose.Schema({
       }
     ]
   }],
+
+  reviews:[
+    {
+      userId:{
+        type:mongoose.Schema.Types.ObjectId,
+      },
+      username:{
+        type:String
+      },
+      review:{
+        type:String
+      },
+      posted_at: {
+        type: Date,
+        default: Date.now,
+      },
+    }
+  ],
     
   isBlocked: {
     type: Boolean,
@@ -90,6 +108,10 @@ const serviceProviderSchema = new mongoose.Schema({
     type: Boolean,
     default:false
   }
-});
+},
+{
+  timestamps: true,
+}
+);
 
 module.exports = mongoose.model("serviceProvider", serviceProviderSchema);

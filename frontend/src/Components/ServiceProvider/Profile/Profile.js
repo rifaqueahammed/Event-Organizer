@@ -10,7 +10,6 @@ function Profile() {
    
 
     useEffect(()=>{
-      // const id = serviceProviderdata.id;
         getServiceProvider().then((response)=>{
           setServiceProvider(response.data);
         }).catch(
