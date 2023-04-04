@@ -83,7 +83,7 @@ function ChangePassword() {
           </div>
           <p className="error text-red-500 md:ml-2 whitespace-nowrap">{formErrors.newpassword}</p>
           <div className='md:flex mt-2'>
-            <label className='md:p-2 whitespace-nowrap w-1/4'>Confirm New Password:</label>
+            <label className='md:p-2 md:whitespace-nowrap w-1/4'>Confirm New Password:</label>
             <input type="password" value={form.confirmnewpassword} onChange={onUpdateField} id="confirmnewpassword" name='confirmnewpassword' class="md:ml-20 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full md:w-1/2 md:p-2"></input>
           </div>
           <p className="error text-red-500 md:ml-2 whitespace-nowrap">{formErrors.confirmnewpassword}</p>

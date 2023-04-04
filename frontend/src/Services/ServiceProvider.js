@@ -52,5 +52,17 @@ export const addService = (data,headers)=>{
 }
 
 export const getServices = ()=>{
-  return axios.get('serviceprovider/getServices');
+  return axios.get('serviceProvider/getServices');
+}
+
+export const refreshServiceProvider = ()=>{
+  return axios.get('serviceProvider/refreshServiceProvider');
+}
+
+export const getReviews = ()=>{
+  return axios.get('serviceProvider/getReviews');
+}
+
+export const deleteReview = (id)=>{
+  return axios.delete(`serviceProvider/deleteReview/${id}`);
 }

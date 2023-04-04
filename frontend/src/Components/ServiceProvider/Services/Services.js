@@ -24,7 +24,7 @@ useEffect(()=>{
          {showServiceModal && <div className='fixed bg-black inset-0 bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-20'><AddServices/></div>}
         <div className='m-5 mt-10 md:shadow-xl grid grid-flow-row sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center place-items-center'>
         {services.map((service,i)=>(
-          <div className='p-5 '>
+          <div className='p-2 md:p-5 '>
              <Card hoverable style={{width: 280,}}
                cover={<img alt="example" style={{  height: 280 }} src={service.images[0].path} />}>
               <Meta title={service.name}/>

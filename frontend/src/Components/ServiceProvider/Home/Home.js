@@ -1,11 +1,18 @@
-import React, {useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Dashboard from '../Dashboard/Dashboard'
 import Profile from '../Profile/Profile'
 import EditProfile from '../Profile/EditProfile'
 import ChangePassword from '../Profile/ChangePassword'
 import Services from '../Services/Services'
-import { useSelector } from 'react-redux'
+import Reviews from '../Reviwes/Reviews';
+import { Avatar } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { actionCreaters } from '../../../Store/Redux/Store/index';
+import { refreshServiceProvider } from '../../../Services/ServiceProvider';
+
 
 
 
@@ -18,7 +25,7 @@ function Home() {
           {name:"Change Password",component:'ChangePassword',icon:"fa-sharp fa-solid fa-gear"}
         ]},
         {name:"Services",component:'Services',icon:"fa-solid fa-briefcase"},
-        {name:"Schedules",component:'Schedules',icon:"fa-solid fa-calendar-days"},
+        // {name:"Schedules",component:'Schedules',icon:"fa-solid fa-calendar-days"},
         {name:"Messages",component:'Messages',icon:"fa-solid fa-paper-plane"},
         {name:"Reviews",component:'Reviews',icon:"fa-solid fa-comments"}
     ]
@@ -26,12 +33,20 @@ function Home() {
     const [submenuOpen,setSubmenuOpen] = useState(false);
     const [component,setComponent] = useState('');
     const navigate = useNavigate();
-    const profile = useSelector(state=>state.ServiceProviderData.serviceProvider.email);
+    const profile = useSelector(state=>state.ServiceProviderData.serviceProvider.companyname);
+    const dispatch = useDispatch();
+    const {ServiceProviderData,removeServiceProvider} = bindActionCreators(actionCreaters,dispatch);
+     
+    useEffect(()=>{
+     refreshServiceProvider().then((response)=>{
+       ServiceProviderData(response.data);
+     });
+    },[ServiceProviderData]);
 
-    
-
-    const logout = (()=>{
+    const logout = ((e)=>{
+      e.preventDefault();
       localStorage.removeItem("serviceproviderToken");
+      removeServiceProvider();
       navigate('/serviceprovider');
     })
 
@@ -72,8 +87,9 @@ function Home() {
                 </button> 
                </div>
             </div>
-            <div className='relative md:static ml-8 md:ml-0 w-full '>
-              <div className='w-full h-10 shadow-xl text-end'><h1 className='mr-4'>{profile}</h1></div>
+            <div className='relative md:static ml-8 md:ml-0 w-full'>
+              <div className='w-full h-20 md:h-10 shadow-xl text-center md:text-end md:mt-2'><h1 className='mr-4'><Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+              <span className='ml-2'>{profile}</span></h1></div>
              <div className='w-full mr-10 mt-5'>
               {component === '' && <Dashboard/>}
               {component === 'Dashboard' && <Dashboard/>}
@@ -81,6 +97,7 @@ function Home() {
               {component === 'EditProfile' && <EditProfile/>}
               {component === 'ChangePassword' && <ChangePassword/>}
               {component === 'Services' && <Services/>}
+              {component === 'Reviews' && <Reviews/>}
              </div>
             </div>
         </section>
