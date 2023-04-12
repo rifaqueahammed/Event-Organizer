@@ -7,8 +7,6 @@ import Admin from './Routes/Admin';
 import User from './Routes/User';
 
 
-
-
 function App() {
   return (
     <div className="App">

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Dashboard from '../Dashboard/Dashboard'
-import Profile from '../Profile/Profile'
-import EditProfile from '../Profile/EditProfile'
-import ChangePassword from '../Profile/ChangePassword'
-import Services from '../Services/Services'
+import { useNavigate } from 'react-router-dom';
+import Dashboard from '../Dashboard/Dashboard';
+import Profile from '../Profile/Profile';
+import EditProfile from '../Profile/EditProfile';
+import ChangePassword from '../Profile/ChangePassword';
+import Services from '../Services/Services';
 import Reviews from '../Reviwes/Reviews';
+import Messages from '../Chat/Messages/Messages'
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux'
@@ -98,6 +99,7 @@ function Home() {
               {component === 'ChangePassword' && <ChangePassword/>}
               {component === 'Services' && <Services/>}
               {component === 'Reviews' && <Reviews/>}
+              {component === 'Messages' && <Messages/>}
              </div>
             </div>
         </section>

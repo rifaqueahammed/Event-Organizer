@@ -11,7 +11,7 @@ import Store from './Store/Redux/Store/Store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  
     <ModalContext>
       <ServiceModalContext>
           <Provider store={Store}>
@@ -19,7 +19,7 @@ root.render(
           </Provider>
     </ServiceModalContext>
     </ModalContext>
-  </React.StrictMode>
+ 
 );
 
 

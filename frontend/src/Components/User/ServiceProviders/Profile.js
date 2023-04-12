@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import {getServiceProviderDetails} from '../../../Services/User';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { addReview ,getReviews } from '../../../Services/User';
 import {  message , Avatar } from 'antd';
@@ -12,6 +12,7 @@ function Profile() {
     const user = useSelector(state=>state.UserData.user);
     const [review,setReview] = useState('');
     const [Reviews,setReviews] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(()=>{
      getServiceProviderDetails(serviceProviderID).then((response)=>{
@@ -43,6 +44,10 @@ function Profile() {
         message.info('Please Login to Continue');
        }
       });
+
+      const chat = ()=>{
+        navigate('/user/chat',{state:{serviceProviderID:serviceProviderID}})
+      };
     
   return (
     <Fragment>
@@ -54,6 +59,7 @@ function Profile() {
             {serviceProviderDetails.line1 && <h1 className=''>{serviceProviderDetails?.line1}<span>,{serviceProviderDetails?.pincode}</span></h1>}
       </div>
       </div>
+      <div className='text-center mt-5 md:text-end md:m-10 font-semibold'><button onClick={chat} className='bg-black rounded p-2 text-white'>Connect with Us</button></div>
       <div className='m-2 text-center md:mt-5'>
         <h1 className='text-xl font-bold md:mb-10'>Our Services</h1>
         { serviceProviderDetails?.services.map((service,i)=>(

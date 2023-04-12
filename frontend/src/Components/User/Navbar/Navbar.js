@@ -17,6 +17,7 @@ const dispatch = useDispatch();
 const {removeUser,UserData} = bindActionCreators(actionCreaters,dispatch);
 
 useEffect(()=>{
+  console.log('ji')
   if(localStorage.getItem("userToken")){
     userRefresh().then((response)=>{
       UserData(response.data)

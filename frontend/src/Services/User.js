@@ -62,3 +62,25 @@ export const addReview = (data)=>{
 export const getReviews = (id)=>{
   return axios.get(`/getReviews/${id}`);
 }
+
+// chat section
+
+export const addNewConversation = (data)=>{
+  return axios.post('/chat/addNewConversation',data);
+}
+
+export const getConversations = (id)=>{
+  return axios.get(`/chat/getConversations/${id}`);
+}
+
+export const getChatServiceProvider = (id)=>{
+  return axios.get(`/chat/getServiceProvider/${id}`);
+}
+
+export const addMessage = (data)=>{
+  return axios.post('/chat/addMessage',data);
+}
+
+export const getMessages = (id)=>{
+  return axios.get(`/chat/getMessages/${id}`);
+}

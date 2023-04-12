@@ -66,3 +66,21 @@ export const getReviews = ()=>{
 export const deleteReview = (id)=>{
   return axios.delete(`serviceProvider/deleteReview/${id}`);
 }
+
+// chat section
+
+export const getConversations = (id)=>{
+  return axios.get(`/chat/getConversations/${id}`);
+}
+
+export const getUser = (id)=>{
+  return axios.get(`/chat/getUser/${id}`);
+}
+
+export const addMessage = (data)=>{
+  return axios.post('/chat/addMessage',data);
+}
+
+export const getMessages = (id)=>{
+  return axios.get(`/chat/getMessages/${id}`);
+}

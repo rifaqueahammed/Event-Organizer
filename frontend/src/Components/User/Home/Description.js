@@ -5,10 +5,10 @@ function Description() {
     <div className='mb-10'>
         <div className='w-full'>
         <hr/>
-            <h1 className='text-2xl font-bold text-center mt-10'>Join Event Organizer to Change your Business</h1>
-            <h4 className='text-xl text-center mt-3 text-gray-500'>Event Organizer is Website Market Place which connect you to needy Customers</h4>
-            <h2 className='text-xl text-center mt-10 font-bold text-[#513B3B]'>Who Can Join ?</h2>
-            <h4 className='text-xl text-center mt-3 text-gray-500'>A Registered Event Management Company With Minimum 1 Year Experience in Related Fields</h4>
+            <h1 className='text-2xl font-bold text-center mt-10'>Connect with Event Organizer to Change your Celebration </h1>
+            <h4 className='text-xl text-center mt-3 text-gray-500'>Event Organizer is Website Market Place which connect you to Trustfull and Quality Event Management Company</h4>
+            <h2 className='text-xl text-center mt-10 font-bold text-[#513B3B]'>Who Can Connect ?</h2>
+            <h4 className='text-xl text-center mt-3 text-gray-500'>Client who search for a Event management Company </h4>
         </div>
         <div className='w-full mt-10 md:flex justify-evenly '>
           <div className='mt-5 md:mt-0 md:w-1/3'>
