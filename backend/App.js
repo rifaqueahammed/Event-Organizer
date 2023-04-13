@@ -25,10 +25,10 @@ dbconnection();
 
 
 // routers
-app.use("/",userRouter);
-app.use("/admin", adminRouter);
-app.use("/serviceProvider", serviceProviderRouter);
-app.use("/chat", chatRouter);
+app.use("/backend",userRouter);
+app.use("/backend/admin", adminRouter);
+app.use("/backend/serviceProvider", serviceProviderRouter);
+app.use("/backend/chat", chatRouter);
 
 
 const io = new Server(server, {
