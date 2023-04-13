@@ -35,8 +35,8 @@ module.exports = {
     
     editProfile : (req,res)=>{
         try{
-            const imagePath = req?.file?.path ? req?.file?.path : req.body.logo_image;
-            const imageName = req?.file?.filename ? req?.file?.filename : req.body.logo_image_name;
+            const imagePath = req.file?.path ? req?.file?.path : req.body.logo_image;
+            const imageName = req.file?.filename ? req?.file?.filename : req.body.logo_image_name;
            // eslint-disable-next-line no-underscore-dangle
            ServiceProvider.findOneAndUpdate({_id:req.id},
             {$set:{
