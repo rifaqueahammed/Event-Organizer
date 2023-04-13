@@ -19,6 +19,5 @@ router.patch('/changePassword',VerifyServiceProvider.verify,ProfileController.ch
 router.post('/addService',VerifyServiceProvider.verify,upload.array('images',5),ServiceController.addService);
 router.get('/getServices',VerifyServiceProvider.verify,ServiceController.getServices);
 router.get('/getReviews',VerifyServiceProvider.verify,Reviews.getAllReviews);
-router.delete('/deleteReview/:id',VerifyServiceProvider.verify,Reviews.deleteReview)
 
 module.exports = router;

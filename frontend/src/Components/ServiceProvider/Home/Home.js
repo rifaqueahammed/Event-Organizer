@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import Dashboard from '../Dashboard/Dashboard';
 import Profile from '../Profile/Profile';
 import EditProfile from '../Profile/EditProfile';
 import ChangePassword from '../Profile/ChangePassword';
@@ -20,13 +19,11 @@ import { refreshServiceProvider } from '../../../Services/ServiceProvider';
 
 function Home() {
     const menu = [
-        {name:"Dashboard",component:'Dashboard',icon:"fa-solid fa-gauge"},
         {name:"Profile", component:'Profile',icon:"fa-solid fa-user",submenu:true,submenuicon:"fa-solid fa-chevron-down",submenuItems:[
           {name:"Edit Profile",component:'EditProfile',icon:"fa-solid fa-pen-to-square"},
           {name:"Change Password",component:'ChangePassword',icon:"fa-sharp fa-solid fa-gear"}
         ]},
         {name:"Services",component:'Services',icon:"fa-solid fa-briefcase"},
-        // {name:"Schedules",component:'Schedules',icon:"fa-solid fa-calendar-days"},
         {name:"Messages",component:'Messages',icon:"fa-solid fa-paper-plane"},
         {name:"Reviews",component:'Reviews',icon:"fa-solid fa-comments"}
     ]
@@ -92,8 +89,7 @@ function Home() {
               <div className='w-full h-20 md:h-10 shadow-xl text-center md:text-end md:mt-2'><h1 className='mr-4'><Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
               <span className='ml-2'>{profile}</span></h1></div>
              <div className='w-full mr-10 mt-5'>
-              {component === '' && <Dashboard/>}
-              {component === 'Dashboard' && <Dashboard/>}
+              {component === '' && <Profile/>}
               {component === 'Profile' && <Profile/>}
               {component === 'EditProfile' && <EditProfile/>}
               {component === 'ChangePassword' && <ChangePassword/>}

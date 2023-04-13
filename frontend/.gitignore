@@ -3,7 +3,6 @@
 # dependencies
 /src/Constants.js
 /node_modules
-/public/images
 /.pnp
 .pnp.js
 

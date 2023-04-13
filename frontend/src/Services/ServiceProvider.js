@@ -63,10 +63,6 @@ export const getReviews = ()=>{
   return axios.get('serviceProvider/getReviews');
 }
 
-export const deleteReview = (id)=>{
-  return axios.delete(`serviceProvider/deleteReview/${id}`);
-}
-
 // chat section
 
 export const getConversations = (id)=>{

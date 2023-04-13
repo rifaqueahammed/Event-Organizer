@@ -8,7 +8,7 @@ function Message({message,own}) {
     <div className={own ? 'message own' : 'message'}>
         <div className='messageTop'>
         {!own && <Avatar style={{ backgroundColor: '#000' }} icon={<UserOutlined />} />}
-        <p className='messageText m-2 p-2 rounded font-semibold'>{message.message}</p>
+        <p className='messageText m-2 p-2 rounded'>{message.message}</p>
         {own && <Avatar style={{ backgroundColor: '#000' }} icon={<UserOutlined />} />}
         </div>
         <div className='text-normal text-gray-500'>{message.createdAt}</div>

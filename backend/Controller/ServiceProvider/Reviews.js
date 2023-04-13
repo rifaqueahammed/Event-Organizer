@@ -57,18 +57,4 @@ module.exports = {
          console.log(error);
         }
      },
-
-     deleteReview:(req,res)=>{
-        try{
-         ServiceProvider.updateOne({_id:req.id},{$pull:{reviews:{_id:req.params.id}}}).then((result)=>{
-          if(result){
-            res.json({success:true});
-          }
-         })
-        }catch(error){
-            // eslint-disable-next-line no-console
-            console.log(error);
-        }
-     }
-
 }
