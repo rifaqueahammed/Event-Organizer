@@ -8,6 +8,7 @@ module.exports = {
 
     signUp : (req,res)=>{
         try{
+          console.log('hi')
             const userData = req.body;
             User.findOne({
                 $or: [
