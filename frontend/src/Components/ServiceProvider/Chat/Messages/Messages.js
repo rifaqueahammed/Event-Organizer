@@ -94,35 +94,38 @@ function Messges() {
   
   return (
     <Fragment>
-        <div className='flex h-screen'>
-            <div className='chatMenu w-2/6 '>
-                <div className='chatMenuWrapper h-full p-5'>
-                 <input placeholder='Search for friends' className='p-2 w-full border-0 border-b-2'></input>
-                 {conversation.map((c,i)=>(
-                  <div onClick={()=>setCurrentChat(c)}>
-                    <Conversation conversation={c} serviceProviderId={serviceProviderId}/>
-                  </div>
-                  ))}
-                </div>
-            </div>
-            <div className='chatBox w-4/6 bg-white shadow-lg h-screen relative'> 
-                 <div className='chatBoxWrapper p-10 h-full overflow-y-scroll'>
-                  { currentChat ?
-                 (<><div className='flex flex-col justify-between'>
-                     { messages.map((m)=>(
-                     <div><Message message={m} own={m.senderId === serviceProviderId}/></div>
-                     ))}
-                   </div> 
-                <div className='flex justify-between m-5 border-1'>
-                  <textarea value={message} onChange={(e) => setMessage(e.target.value)} className='p-1 w-3/4 shadow-lg bg-gray-300 rounded ' name='text' placeholder='Write something...'></textarea>
-                  <button onClick={sendMessage} className='rounded bg-black px-5 text-white font-bold'>Send</button>
-                </div></>) :(<span className='text-3xl text-gray-300 m-5'>Open a conversation to start a chat</span>)
-                    }
-                 </div>
-            </div>
-
-        </div>
-    </Fragment>
+  <div className='flex flex-col lg:flex-row'>
+    <div className='chatMenu w-full lg:w-2/6'>
+      <div className='chatMenuWrapper h-full p-5'>
+        <input placeholder='Search for friends' className='p-2 w-full border-0 border-b-2'></input>
+        {conversation.map((c,i)=>(
+          <div onClick={()=>setCurrentChat(c)} className='shadow-lg rounded'>
+            <Conversation conversation={c} serviceProviderId={serviceProviderId}/>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div className='chatBox w-full lg:w-4/6 bg-gray-200 h-screen'>  
+      <div className='chatBoxWrapper p-10 bg-gray-100 overflow-y-scroll h-5/6'>
+        { currentChat ? (
+          <>
+            <div className='flex flex-col justify-between'>
+              { messages.map((m)=>(
+                <div><Message message={m} own={m.senderId === serviceProviderId}/></div>
+              ))}
+            </div> 
+          </>
+        ) : (
+          <span className='text-3xl text-gray-300 m-5'>Open a conversation to start a chat</span>
+        )}
+      </div>
+      <div className='flex p-5 border-2 w-full bg-white'>
+          <input value={message} onChange={(e) => setMessage(e.target.value)} className='p-2 lg:p-5 w-2/3 lg:w-3/4 shadow-lg rounded' name='text' placeholder='Write something...'></input>
+          <button onClick={sendMessage} className='rounded bg-black px-5 text-white font-bold ml-5'>Send</button>
+      </div>
+    </div>
+  </div>
+</Fragment>
   )
 }
 

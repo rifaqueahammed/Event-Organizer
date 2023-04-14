@@ -66,3 +66,15 @@ export const serviceProviderControll = (data)=>{
 export const userControll = (data)=>{
     return axios.patch('admin/userControll',data);
 }
+
+export const dashboardUserCounts = ()=>{
+  return axios.get('admin/dashboardUserCounts');
+}
+
+export const dashboardServiceProviderCounts = ()=>{
+  return axios.get('admin/dashboardServiceProviderCounts');
+}
+
+export const dashboardPendingRequestCounts = ()=>{
+  return axios.get('admin/dashboardPendingRequestCounts');
+}

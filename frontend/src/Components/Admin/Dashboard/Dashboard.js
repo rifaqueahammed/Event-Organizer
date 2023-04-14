@@ -1,10 +1,32 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
+import Chart from './Chart'
+import { dashboardUserCounts,dashboardServiceProviderCounts,dashboardPendingRequestCounts } from '../../../Services/Admin';
 
 function Dashboard() {
+
+  const [userCount,setuserCount] = useState('');
+  const [serviceProviderCount,setserviceProviderCount] = useState('');
+  const [serviceCount,setserviceCount] = useState('');
+  const [pendingRequestCount,setpendingRequestCount] = useState('');
+
+
+useEffect(()=>{
+  dashboardUserCounts().then((response)=>{
+      setuserCount(response.data);
+    });
+  dashboardServiceProviderCounts().then((response)=>{
+      setserviceProviderCount(response.data);
+  });
+  dashboardPendingRequestCounts().then((response)=>{
+    setpendingRequestCount(response.data);
+  })
+  setserviceCount(6);
+  }, [])
+  
   return (
     <Fragment>
       <div className='text-center font-semibold mb-5'><h2>Dashboard</h2></div>
-      <div className="flex h-full w-full bg-white p-5">
+      <div className="flex w-full p-2">
         <div className="grid w-full h-full">
           <div className="grid grid-cols-12 gap-6">
             <div className="grid grid-cols-12 col-span-12 gap-6 xxl:col-span-9">
@@ -31,7 +53,7 @@ function Dashboard() {
                       <div className="ml-2 w-full flex-1">
                         <div>
                           <div className="mt-3 text-3xl font-bold leading-8">
-                           6
+                          {userCount}
                           </div>
                           <div className="mt-1 text-base text-gray-600">
                             Users
@@ -49,7 +71,7 @@ function Dashboard() {
                           viewBox="0 0 24 24"
                           strokeWidth={2}
                           stroke="currentColor"
-                          className="w-7 h-7 text-yellow-400"
+                          className="w-7 h-7 text-green-300"
                         >
                           <path
                             strokeLinecap="round"
@@ -61,7 +83,7 @@ function Dashboard() {
                       <div className="ml-2 w-full flex-1">
                         <div>
                           <div className="mt-3 text-3xl font-bold leading-8">
-                          8
+                          {serviceProviderCount}
                           </div>
                           <div className="mt-1 text-base text-gray-600">
                           Service Providers
@@ -79,19 +101,19 @@ function Dashboard() {
                           viewBox="0 0 24 24"
                           strokeWidth={2}
                           stroke="currentColor"
-                          className="h-7 w-7 text-pink-600"
+                          className="h-7 w-7 text-yellow-600"
                         >
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
+                            d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9"
                           />
                         </svg>
                       </div>
                       <div className="ml-2 w-full flex-1">
                         <div>
                           <div className="mt-3 text-3xl font-bold leading-8">
-                          6
+                          {serviceCount}
                           </div>
                           <div className="mt-1 text-base text-gray-600">
                            Total Services
@@ -121,7 +143,7 @@ function Dashboard() {
                       <div className="ml-2 w-full flex-1">
                         <div>
                           <div className="mt-3 text-3xl font-bold leading-8">
-                          6
+                          {pendingRequestCount}
                           </div>
                           <div className="mt-1 text-base text-gray-600">
                            Pending Requests
@@ -132,10 +154,11 @@ function Dashboard() {
                   </div>
                </div>
               </div>
-              <div className="col-span-12 mt-5">
+              <div className="col-span-12 mt-2">
                 <div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
                   <div className="bg-white shadow-lg" id="chartpie">
-                    {/* <PieChart/> */}
+                    <Chart userCount={userCount} serviceProviderCount={serviceProviderCount} 
+                    pendingRequestCount={pendingRequestCount} serviceCount={serviceCount}/>
                   </div>
                 </div>
               </div>
